@@ -18,6 +18,7 @@ int main(int argc, char **argv) {
     puts("result:");
     for (int i=0;i<SHA1HashSize;i++) {
         printf("%x", (digest_buf[i] >> 4) & 0xF);
+        printf("%x", (digest_buf[i]) & 0xF);
     }
     puts("\n");
 
