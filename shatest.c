@@ -43,7 +43,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <unistd.h>     /* defines getopt() and optarg */
+// #include <unistd.h>     /* defines getopt() and optarg */
 #include "sha.h"
 
 static int scasecmp(const char *s1, const char *s2);
@@ -1326,187 +1326,187 @@ int unhexStr(char *hexstr)
   return len;
 }
 
-int main(int argc, char **argv)
-{
-  int i, err;
-  int loopno, loopnohigh = 1;
-  int hashno, hashnolow = 0, hashnohigh = HASHCOUNT - 1;
-  int testno, testnolow = 0, testnohigh;
-  int ntestnohigh = 0;
-  int printResults = PRINTTEXT;
-  int printPassFail = 1;
-  int checkErrors = 0;
-  char *hashstr = 0;
-  int hashlen = 0;
-  const char *resultstr = 0;
-  char *randomseedstr = 0;
-  int runHmacTests = 0;
-  int runHkdfTests = 0;
-  char *hmacKey = 0;
-  int hmaclen = 0;
-  char *info = 0;
-  int infolen = 0, okmlen = 0;
-  int randomcount = RANDOMCOUNT;
-  const char *hashfilename = 0;
-  const char *hashFilename = 0;
-  int extrabits = 0, numberExtrabits = 0;
-  int strIsHex = 0;
+// int main(int argc, char **argv)
+// {
+//   int i, err;
+//   int loopno, loopnohigh = 1;
+//   int hashno, hashnolow = 0, hashnohigh = HASHCOUNT - 1;
+//   int testno, testnolow = 0, testnohigh;
+//   int ntestnohigh = 0;
+//   int printResults = PRINTTEXT;
+//   int printPassFail = 1;
+//   int checkErrors = 0;
+//   char *hashstr = 0;
+//   int hashlen = 0;
+//   const char *resultstr = 0;
+//   char *randomseedstr = 0;
+//   int runHmacTests = 0;
+//   int runHkdfTests = 0;
+//   char *hmacKey = 0;
+//   int hmaclen = 0;
+//   char *info = 0;
+//   int infolen = 0, okmlen = 0;
+//   int randomcount = RANDOMCOUNT;
+//   const char *hashfilename = 0;
+//   const char *hashFilename = 0;
+//   int extrabits = 0, numberExtrabits = 0;
+//   int strIsHex = 0;
 
-  if ('A' != 0x41) {
-    fprintf(stderr, "%s: these tests require ASCII\n", argv[0]);
-  }
+//   if ('A' != 0x41) {
+//     fprintf(stderr, "%s: these tests require ASCII\n", argv[0]);
+//   }
 
-  while ((i = getopt(argc, argv,
-                      "6b:B:def:F:h:i:Hk:l:L:mpPr:R:s:S:t:wxX")) != -1)
-    switch (i) {
-      case 'b': extrabits = strtol(optarg, 0, 0); break;
-      case 'B': numberExtrabits = atoi(optarg); break;
-      case 'd': runHkdfTests = 1; break;
-      case 'e': checkErrors = 1; break;
-      case 'f': hashfilename = optarg; break;
-      case 'F': hashFilename = optarg; break;
-      case 'h': hashnolow = hashnohigh = findhash(argv[0], optarg);
-        break;
-      case 'H': strIsHex = 1; break;
-      case 'i': info = optarg; infolen = strlen(optarg); break;
-      case 'k': hmacKey = optarg; hmaclen = strlen(optarg); break;
-      case 'l': loopnohigh = atoi(optarg); break;
-      case 'L': okmlen = strtol(optarg, 0, 0); break;
-      case 'm': runHmacTests = 1; break;
-      case 'P': printPassFail = 0; break;
-      case 'p': printResults = PRINTNONE; break;
-      case 'R': randomcount = atoi(optarg); break;
-      case 'r': randomseedstr = optarg; break;
-      case 's': hashstr = optarg; hashlen = strlen(hashstr); break;
-      case 'S': resultstr = optarg; break;
-      case 't': testnolow = ntestnohigh = atoi(optarg) - 1; break;
-      case 'w': printResults = PRINTRAW; break;
-      case 'x': printResults = PRINTHEX; break;
-      case 'X': printPassFail = 2; break;
-      case '6': printResults = PRINTBASE64; break;
-      default: usage(argv[0]);
-      }
+//   while ((i = getopt(argc, argv,
+//                       "6b:B:def:F:h:i:Hk:l:L:mpPr:R:s:S:t:wxX")) != -1)
+//     switch (i) {
+//       case 'b': extrabits = strtol(optarg, 0, 0); break;
+//       case 'B': numberExtrabits = atoi(optarg); break;
+//       case 'd': runHkdfTests = 1; break;
+//       case 'e': checkErrors = 1; break;
+//       case 'f': hashfilename = optarg; break;
+//       case 'F': hashFilename = optarg; break;
+//       case 'h': hashnolow = hashnohigh = findhash(argv[0], optarg);
+//         break;
+//       case 'H': strIsHex = 1; break;
+//       case 'i': info = optarg; infolen = strlen(optarg); break;
+//       case 'k': hmacKey = optarg; hmaclen = strlen(optarg); break;
+//       case 'l': loopnohigh = atoi(optarg); break;
+//       case 'L': okmlen = strtol(optarg, 0, 0); break;
+//       case 'm': runHmacTests = 1; break;
+//       case 'P': printPassFail = 0; break;
+//       case 'p': printResults = PRINTNONE; break;
+//       case 'R': randomcount = atoi(optarg); break;
+//       case 'r': randomseedstr = optarg; break;
+//       case 's': hashstr = optarg; hashlen = strlen(hashstr); break;
+//       case 'S': resultstr = optarg; break;
+//       case 't': testnolow = ntestnohigh = atoi(optarg) - 1; break;
+//       case 'w': printResults = PRINTRAW; break;
+//       case 'x': printResults = PRINTHEX; break;
+//       case 'X': printPassFail = 2; break;
+//       case '6': printResults = PRINTBASE64; break;
+//       default: usage(argv[0]);
+//       }
 
-  if (strIsHex) {
-    hashlen = unhexStr(hashstr);
-    unhexStr(randomseedstr);
-    hmaclen = unhexStr(hmacKey);
-    infolen = unhexStr(info);
-  }
-  testnohigh = (ntestnohigh != 0) ? ntestnohigh:
-               runHmacTests ? (HMACTESTCOUNT-1) :
-               runHkdfTests ? (HKDFTESTCOUNT-1) :
-               (TESTCOUNT-1);
-  if ((testnolow < 0) ||
-      (testnohigh >= (runHmacTests ? HMACTESTCOUNT : TESTCOUNT)) ||
-      (hashnolow < 0) || (hashnohigh >= HASHCOUNT) ||
-      (hashstr && (testnolow == testnohigh)) ||
-      (randomcount < 0) ||
-      (resultstr && (!hashstr && !hashfilename && !hashFilename)) ||
-      ((runHmacTests || hmacKey) && randomseedstr) ||
-      (hashfilename && hashFilename) ||
-      (info && ((infolen <= 0) || (okmlen <= 0))) ||
-      (info && !hmacKey))
-    usage(argv[0]);
+//   if (strIsHex) {
+//     hashlen = unhexStr(hashstr);
+//     unhexStr(randomseedstr);
+//     hmaclen = unhexStr(hmacKey);
+//     infolen = unhexStr(info);
+//   }
+//   testnohigh = (ntestnohigh != 0) ? ntestnohigh:
+//                runHmacTests ? (HMACTESTCOUNT-1) :
+//                runHkdfTests ? (HKDFTESTCOUNT-1) :
+//                (TESTCOUNT-1);
+//   if ((testnolow < 0) ||
+//       (testnohigh >= (runHmacTests ? HMACTESTCOUNT : TESTCOUNT)) ||
+//       (hashnolow < 0) || (hashnohigh >= HASHCOUNT) ||
+//       (hashstr && (testnolow == testnohigh)) ||
+//       (randomcount < 0) ||
+//       (resultstr && (!hashstr && !hashfilename && !hashFilename)) ||
+//       ((runHmacTests || hmacKey) && randomseedstr) ||
+//       (hashfilename && hashFilename) ||
+//       (info && ((infolen <= 0) || (okmlen <= 0))) ||
+//       (info && !hmacKey))
+//     usage(argv[0]);
 
-  /*
-   *  Perform SHA/HMAC tests
-   */
-  for (hashno = hashnolow; hashno <= hashnohigh; ++hashno) {
-    if (printResults == PRINTTEXT)
-      printf("Hash %s\n", hashes[hashno].name);
-    err = shaSuccess;
+//   /*
+//    *  Perform SHA/HMAC tests
+//    */
+//   for (hashno = hashnolow; hashno <= hashnohigh; ++hashno) {
+//     if (printResults == PRINTTEXT)
+//       printf("Hash %s\n", hashes[hashno].name);
+//     err = shaSuccess;
 
-    for (loopno = 1; (loopno <= loopnohigh) && (err == shaSuccess);
-         ++loopno) {
-      if (hashstr)
-        err = hash(0, loopno, hashno, hashstr, hashlen, 1,
-          numberExtrabits, extrabits, (const unsigned char *)hmacKey,
-          hmaclen, (const uint8_t *) info, infolen, okmlen, resultstr,
-          hashes[hashno].hashsize, printResults, printPassFail);
+//     for (loopno = 1; (loopno <= loopnohigh) && (err == shaSuccess);
+//          ++loopno) {
+//       if (hashstr)
+//         err = hash(0, loopno, hashno, hashstr, hashlen, 1,
+//           numberExtrabits, extrabits, (const unsigned char *)hmacKey,
+//           hmaclen, (const uint8_t *) info, infolen, okmlen, resultstr,
+//           hashes[hashno].hashsize, printResults, printPassFail);
 
-      else if (randomseedstr)
-        randomtest(hashno, randomseedstr, hashes[hashno].hashsize, 0,
-          randomcount, printResults, printPassFail);
+//       else if (randomseedstr)
+//         randomtest(hashno, randomseedstr, hashes[hashno].hashsize, 0,
+//           randomcount, printResults, printPassFail);
 
-      else if (hashfilename)
-        err = hashfile(hashno, hashfilename, extrabits,
-                       numberExtrabits, 0,
-                       (const unsigned char *)hmacKey, hmaclen,
-                       (const uint8_t *) info, infolen, okmlen,
-                       resultstr, hashes[hashno].hashsize,
-                       printResults, printPassFail);
+//       else if (hashfilename)
+//         err = hashfile(hashno, hashfilename, extrabits,
+//                        numberExtrabits, 0,
+//                        (const unsigned char *)hmacKey, hmaclen,
+//                        (const uint8_t *) info, infolen, okmlen,
+//                        resultstr, hashes[hashno].hashsize,
+//                        printResults, printPassFail);
 
-      else if (hashFilename)
-        err = hashfile(hashno, hashFilename, extrabits,
-                       numberExtrabits, 1,
-                       (const unsigned char *)hmacKey, hmaclen,
-                       (const uint8_t *) info, infolen, okmlen,
-                       resultstr, hashes[hashno].hashsize,
-                       printResults, printPassFail);
+//       else if (hashFilename)
+//         err = hashfile(hashno, hashFilename, extrabits,
+//                        numberExtrabits, 1,
+//                        (const unsigned char *)hmacKey, hmaclen,
+//                        (const uint8_t *) info, infolen, okmlen,
+//                        resultstr, hashes[hashno].hashsize,
+//                        printResults, printPassFail);
 
-      else /* standard tests */ {
-        for (testno = testnolow;
-             (testno <= testnohigh) && (err == shaSuccess); ++testno) {
-          if (runHmacTests) {
-            err = hash(testno, loopno, hashno,
-                       hmachashes[testno].dataarray[hashno] ?
-                       hmachashes[testno].dataarray[hashno] :
-                       hmachashes[testno].dataarray[1] ?
-                       hmachashes[testno].dataarray[1] :
-                       hmachashes[testno].dataarray[0],
-                       hmachashes[testno].datalength[hashno] ?
-                       hmachashes[testno].datalength[hashno] :
-                       hmachashes[testno].datalength[1] ?
-                       hmachashes[testno].datalength[1] :
-                       hmachashes[testno].datalength[0],
-                       1, 0, 0,
-                       (const unsigned char *)(
-                        hmachashes[testno].keyarray[hashno] ?
-                        hmachashes[testno].keyarray[hashno] :
-                        hmachashes[testno].keyarray[1] ?
-                        hmachashes[testno].keyarray[1] :
-                        hmachashes[testno].keyarray[0]),
-                       hmachashes[testno].keylength[hashno] ?
-                       hmachashes[testno].keylength[hashno] :
-                       hmachashes[testno].keylength[1] ?
-                       hmachashes[testno].keylength[1] :
-                       hmachashes[testno].keylength[0],
-                       0, 0, 0,
-                       hmachashes[testno].resultarray[hashno],
-                       hmachashes[testno].resultlength[hashno],
-                       printResults, printPassFail);
-          } else if (runHkdfTests) {
-            err = hashHkdf(testno, loopno, hashno,
-                       printResults, printPassFail);
-          } else { /* sha tests */
-            err = hash(testno, loopno, hashno,
-                       hashes[hashno].tests[testno].testarray,
-                       hashes[hashno].tests[testno].length,
-                       hashes[hashno].tests[testno].repeatcount,
-                       hashes[hashno].tests[testno].numberExtrabits,
-                       hashes[hashno].tests[testno].extrabits,
-                       0, 0, 0, 0, 0,
-                       hashes[hashno].tests[testno].resultarray,
-                       hashes[hashno].hashsize,
-                       printResults, printPassFail);
-          }
-        }
-        if (!runHmacTests && !runHkdfTests) {
-          randomtest(hashno, hashes[hashno].randomtest,
-            hashes[hashno].hashsize, hashes[hashno].randomresults,
-            RANDOMCOUNT, printResults, printPassFail);
-        }
-      }
-    }
-  }
-  /* Test some error returns */
-  if (checkErrors) {
-    testErrors(hashnolow, hashnohigh, printResults, printPassFail);
-  }
+//       else /* standard tests */ {
+//         for (testno = testnolow;
+//              (testno <= testnohigh) && (err == shaSuccess); ++testno) {
+//           if (runHmacTests) {
+//             err = hash(testno, loopno, hashno,
+//                        hmachashes[testno].dataarray[hashno] ?
+//                        hmachashes[testno].dataarray[hashno] :
+//                        hmachashes[testno].dataarray[1] ?
+//                        hmachashes[testno].dataarray[1] :
+//                        hmachashes[testno].dataarray[0],
+//                        hmachashes[testno].datalength[hashno] ?
+//                        hmachashes[testno].datalength[hashno] :
+//                        hmachashes[testno].datalength[1] ?
+//                        hmachashes[testno].datalength[1] :
+//                        hmachashes[testno].datalength[0],
+//                        1, 0, 0,
+//                        (const unsigned char *)(
+//                         hmachashes[testno].keyarray[hashno] ?
+//                         hmachashes[testno].keyarray[hashno] :
+//                         hmachashes[testno].keyarray[1] ?
+//                         hmachashes[testno].keyarray[1] :
+//                         hmachashes[testno].keyarray[0]),
+//                        hmachashes[testno].keylength[hashno] ?
+//                        hmachashes[testno].keylength[hashno] :
+//                        hmachashes[testno].keylength[1] ?
+//                        hmachashes[testno].keylength[1] :
+//                        hmachashes[testno].keylength[0],
+//                        0, 0, 0,
+//                        hmachashes[testno].resultarray[hashno],
+//                        hmachashes[testno].resultlength[hashno],
+//                        printResults, printPassFail);
+//           } else if (runHkdfTests) {
+//             err = hashHkdf(testno, loopno, hashno,
+//                        printResults, printPassFail);
+//           } else { /* sha tests */
+//             err = hash(testno, loopno, hashno,
+//                        hashes[hashno].tests[testno].testarray,
+//                        hashes[hashno].tests[testno].length,
+//                        hashes[hashno].tests[testno].repeatcount,
+//                        hashes[hashno].tests[testno].numberExtrabits,
+//                        hashes[hashno].tests[testno].extrabits,
+//                        0, 0, 0, 0, 0,
+//                        hashes[hashno].tests[testno].resultarray,
+//                        hashes[hashno].hashsize,
+//                        printResults, printPassFail);
+//           }
+//         }
+//         if (!runHmacTests && !runHkdfTests) {
+//           randomtest(hashno, hashes[hashno].randomtest,
+//             hashes[hashno].hashsize, hashes[hashno].randomresults,
+//             RANDOMCOUNT, printResults, printPassFail);
+//         }
+//       }
+//     }
+//   }
+//   /* Test some error returns */
+//   if (checkErrors) {
+//     testErrors(hashnolow, hashnohigh, printResults, printPassFail);
+//   }
 
-  return 0;
-}
+//   return 0;
+// }
 
 /*
  * Compare two strings, case independently.
