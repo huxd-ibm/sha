@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
     ret = SHA256Result(&ctx, digest_buf);
     printf("result return: %d\n", ret);
     puts("result:");
-    for (int i=0;i<SHA1HashSize;i++) {
+    for (int i=0;i<SHA256HashSize;i++) {
         printf("%x", (digest_buf[i] >> 4) & 0xF);
         printf("%x", (digest_buf[i]) & 0xF);
     }
